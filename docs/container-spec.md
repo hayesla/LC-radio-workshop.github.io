@@ -1,7 +1,6 @@
 # Container Spec
 
-Working draft of the shared analysis container for heliospheric radio
-data.
+Working draft of the shared analysis container for heliospheric radio data.
 
 ## Requirements
 

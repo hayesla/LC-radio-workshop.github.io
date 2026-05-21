@@ -12,3 +12,4 @@ site/
 # Editor
 .idea/
 .vscode/
+.history
