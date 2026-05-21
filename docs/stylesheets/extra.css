@@ -1,3 +1,32 @@
+/* Expand content column to near-full viewport on instruments page */
+.md-content:has(.instruments-table) .md-content__inner {
+  max-width: calc(100vw - 2.4rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* simple-datatables adds its own scroll wrapper — don't add another */
+.instruments-table {
+  width: 100%;
+}
+
+.instruments-table table {
+  width: 100%;
+}
+
+/* Font-size slider above the instruments table */
+.instruments-controls {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: .6rem;
+  font-size: .85rem;
+}
+
+.instruments-controls input[type="range"] {
+  width: 8rem;
+}
+
 /* Make the header logo a bit bigger so the sticker is recognisable */
 .md-header__button.md-logo {
   margin: .2rem;

@@ -1,3 +1,9 @@
+---
+hide:
+  - toc
+  - navigation
+---
+
 # Instrument Catalogue
 
 Reference table of heliospheric radio instruments relevant to this workshop.

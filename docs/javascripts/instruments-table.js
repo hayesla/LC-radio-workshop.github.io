@@ -44,6 +44,26 @@ function enhanceInstrumentsTable() {
     });
   });
 
+  // Font-size slider injected above the table, persisted in localStorage.
+  const FONT_KEY = "instruments-font-size";
+  const savedSize = parseInt(localStorage.getItem(FONT_KEY) || "14", 10);
+  wrapper.style.fontSize = savedSize + "px";
+
+  const controls = document.createElement("div");
+  controls.className = "instruments-controls";
+  controls.innerHTML = `
+    <label for="font-size-slider">Text size: <span id="font-size-value">${savedSize}</span>px</label>
+    <input id="font-size-slider" type="range" min="10" max="20" step="1" value="${savedSize}">
+  `;
+  wrapper.insertAdjacentElement("beforebegin", controls);
+
+  document.getElementById("font-size-slider").addEventListener("input", e => {
+    const size = e.target.value;
+    wrapper.style.fontSize = size + "px";
+    document.getElementById("font-size-value").textContent = size;
+    localStorage.setItem(FONT_KEY, size);
+  });
+
   // Initialise Simple-DataTables.
   if (typeof simpleDatatables !== "undefined") {
     new simpleDatatables.DataTable(table, {
