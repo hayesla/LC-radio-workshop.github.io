@@ -10,24 +10,24 @@ Organisers and contributors to the workshop.
 
 ## Participants
 
-- **Samuel Badman**
-- **Will Barnes**
-- **Shilpi Bhunia**
-- **Xavier Bonnin**
-- **Catherine Cuddy**
-- **Henrik Eklund**
-- **Nabil Freij**
-- **Lucas Grosset**
 - **Alexis Jeandet**
-- **Kamen Kozarev**
-- **Herman Le Roux**
-- **Shane Maloney**
-- **Sophie Musset**
-- **Mohamed Nedal**
-- **Aikaterini Pesini**
-- **Marc Pulupa**
-- **Hamish Reid**
+- **Catherine Cuddy**
 - **Daniel Ryan**
-- **Vergil Yotov**
-- **Sijie Yu**
+- **Hamish Reid**
+- **Henrik Eklund**
+- **Herman Le Roux**
+- **Kamen Kozarev**
+- **Katerina Pesini**
+- **Lucas Grosset**
+- **Marc Pulupa**
+- **Mohamed Nedal**
+- **Nabil Freij**
 - **Pietro Zucca**
+- **Samuel Badman**
+- **Shane Maloney**
+- **Shilpi Bhunia**
+- **Sijie Yu**
+- **Sophie Musset**
+- **Will Barnes**
+- **Xavier Bonnin**
+
