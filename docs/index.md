@@ -4,6 +4,8 @@ Welcome to the documentation site for the Lorentz Center workshop **["Bridging G
 
 This site collects working notes, an instrument catalogue, tooling specifications, and example analyses produced before, during, and after the workshop.
 
+**This site will not be regularly updated into the future, think of this as a historical record of the outputs of the workshop.**
+
 ## About the workshop
 
 Heliospheric radio observations span an enormous range of frequencies, instruments, and data formats.
