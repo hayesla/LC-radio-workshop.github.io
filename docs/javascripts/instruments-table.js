@@ -1,14 +1,131 @@
-// Enhance the instrument catalogue table with auto-linked URLs and
-// Simple-DataTables (sort, search, paginate). Resilient to column
-// changes in the source spreadsheet — works on whatever table the
-// table-reader plugin produces.
+// Load the instrument catalogue from a published Google Sheets CSV, then
+// enhance the table with auto-linked URLs and Simple-DataTables.
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let field = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i += 1) {
+    const char = text[i];
+
+    if (inQuotes) {
+      if (char === '"') {
+        if (text[i + 1] === '"') {
+          field += '"';
+          i += 1;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        field += char;
+      }
+      continue;
+    }
+
+    if (char === '"') {
+      inQuotes = true;
+    } else if (char === ",") {
+      row.push(field);
+      field = "";
+    } else if (char === "\n" || char === "\r") {
+      if (char === "\r" && text[i + 1] === "\n") i += 1;
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = "";
+    } else {
+      field += char;
+    }
+  }
+
+  if (field !== "" || row.length > 0) {
+    row.push(field);
+    rows.push(row);
+  }
+
+  return rows.filter(cells => cells.some(cell => cell.trim() !== ""));
+}
+
+function buildInstrumentsTable(rows) {
+  if (rows.length < 2) {
+    throw new Error("The instrument catalogue CSV does not contain table rows.");
+  }
+
+  const headers = rows[0];
+  const table = document.createElement("table");
+  const thead = table.createTHead();
+  const headerRow = thead.insertRow();
+
+  headers.forEach(header => {
+    const th = document.createElement("th");
+    th.textContent = header.trim();
+    headerRow.appendChild(th);
+  });
+
+  const tbody = table.createTBody();
+  rows.slice(1).forEach(row => {
+    const tr = tbody.insertRow();
+    headers.forEach((_, index) => {
+      const td = tr.insertCell();
+      td.textContent = (row[index] || "").trim();
+    });
+  });
+
+  return table;
+}
+
+async function loadInstrumentsTable(wrapper) {
+  const csvUrl = wrapper.dataset.csvUrl;
+  if (!csvUrl || wrapper.dataset.csvState) return;
+
+  wrapper.dataset.csvState = "loading";
+
+  try {
+    const response = await fetch(csvUrl, { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`Google Sheets returned ${response.status}`);
+    }
+
+    const csvText = await response.text();
+    const table = buildInstrumentsTable(parseCsv(csvText));
+
+    wrapper.textContent = "";
+    wrapper.appendChild(table);
+    wrapper.dataset.csvState = "loaded";
+    enhanceInstrumentsTable();
+  } catch (error) {
+    wrapper.dataset.csvState = "error";
+    wrapper.textContent = "";
+
+    const message = document.createElement("p");
+    message.className = "instruments-status instruments-status--error";
+    message.textContent = "Could not load the live instrument catalogue. ";
+
+    const link = document.createElement("a");
+    link.href = csvUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Open the source CSV";
+
+    message.appendChild(link);
+    message.append(".");
+    wrapper.appendChild(message);
+    console.error(error);
+  }
+}
 
 function enhanceInstrumentsTable() {
   const wrapper = document.querySelector(".instruments-table");
   if (!wrapper) return;
 
   const table = wrapper.querySelector("table");
-  if (!table || table.dataset.dtInit === "true") return;
+  if (!table) {
+    loadInstrumentsTable(wrapper);
+    return;
+  }
+  if (table.dataset.dtInit === "true") return;
   table.dataset.dtInit = "true";
 
   // Hide section-header rows (rows where only the first cell has content).
@@ -62,10 +179,10 @@ function enhanceInstrumentsTable() {
   `;
   wrapper.insertAdjacentElement("beforebegin", controls);
 
-  document.getElementById("font-size-slider").addEventListener("input", e => {
+  controls.querySelector("#font-size-slider").addEventListener("input", e => {
     const size = e.target.value;
     wrapper.style.fontSize = size + "px";
-    document.getElementById("font-size-value").textContent = size;
+    controls.querySelector("#font-size-value").textContent = size;
     localStorage.setItem(FONT_KEY, size);
   });
 
