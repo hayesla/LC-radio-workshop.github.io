@@ -4,6 +4,8 @@ Welcome to the documentation site for the Lorentz Center workshop **["Bridging G
 
 This site collects working notes, an instrument catalogue, tooling specifications, and example analyses produced before, during, and after the workshop.
 
+**This site will not be regularly updated into the future, think of this as a historical record of the outputs of the workshop.**
+
 ## About the workshop
 
 Heliospheric radio observations span an enormous range of frequencies, instruments, and data formats.
@@ -60,6 +62,7 @@ The aim of this week is to bridge those gaps: to agree on shared data convention
 
 ## Links
 
-- GitHub organisation: <https://github.com/LC-radio-workshop>
-- Source for this site: <https://github.com/LC-radio-workshop/LC-radio-workshop.github.io>
-- Lorentz Center: <https://www.lorentzcenter.nl/>
+- [GitHub organisation](https://github.com/LC-radio-workshop)
+- [Source for this site](https://github.com/LC-radio-workshop/LC-radio-workshop.github.io)
+- [Lorentz Center](https://www.lorentzcenter.nl/)
+- [Meeting @ Lorentz Center](https://www.lorentzcenter.nl/bridging-gaps-in-heliospheric-radio-data-analyses.html)

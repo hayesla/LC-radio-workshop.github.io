@@ -27,6 +27,69 @@
   width: 8rem;
 }
 
+/* Hide left navigation sidebar; let content fill the space */
+.md-sidebar--primary {
+  display: none;
+}
+.md-main .md-main__inner {
+  justify-content: center;
+}
+
+/* Hide right TOC sidebar when no H2+ subheadings exist */
+.md-sidebar--secondary:not(:has(.md-nav--secondary .md-nav__list .md-nav__item)) {
+  display: none;
+}
+
+/* Workshop schedule table */
+.schedule-wrapper {
+  overflow-x: auto;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  table-layout: fixed;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  padding: 0.45rem 0.6rem;
+  vertical-align: top;
+  text-align: center;
+}
+
+.schedule-table thead th {
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  font-weight: 600;
+}
+
+.schedule-table td.time {
+  font-weight: 600;
+  white-space: nowrap;
+  width: 7rem;
+  text-align: left;
+  color: var(--md-default-fg-color--light);
+}
+
+.schedule-table td.break {
+  background-color: var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color--light);
+  font-style: italic;
+}
+
+.schedule-table td.social {
+  background-color: color-mix(in srgb, var(--md-accent-fg-color) 15%, transparent);
+  font-weight: 500;
+}
+
+.schedule-table td.end {
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+}
+
 /* Make the header logo a bit bigger so the sticker is recognisable */
 .md-header__button.md-logo {
   margin: .2rem;
